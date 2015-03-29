@@ -68,6 +68,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # before CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
@@ -114,6 +115,8 @@ INSTALLED_APPS = (
     'mygpo.pubsub',
     'mygpo.podcastlists',
     'mygpo.votes',
+    'oauth2_provider',
+    'corsheaders',
 )
 
 try:
@@ -269,6 +272,11 @@ GOOGLE_CLIENT_SECRET=''
 
 # URL where users of the site can get support
 SUPPORT_URL=''
+
+
+# Allow CORS from everywhere; required for OAuth in JS
+# This could replace the custom implementation in mygpo.decorators.cors_origin
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Elasticsearch settings
